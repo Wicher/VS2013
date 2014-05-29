@@ -37,7 +37,8 @@
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Enabled = false;
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "AT Commander";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.ResumeLayout(false);
 
         }

@@ -30,59 +30,94 @@
         {
             this.btnConnect = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cBoxComPorts = new System.Windows.Forms.ComboBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(10, 127);
+            this.btnConnect.Location = new System.Drawing.Point(10, 90);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(5);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(100, 25);
+            this.btnConnect.Size = new System.Drawing.Size(75, 23);
             this.btnConnect.TabIndex = 0;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(120, 127);
+            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExit.Location = new System.Drawing.Point(99, 90);
             this.btnExit.Margin = new System.Windows.Forms.Padding(5);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(100, 25);
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // comboBox1
+            // cBoxComPorts
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(10, 9);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 2;
+            this.cBoxComPorts.FormattingEnabled = true;
+            this.cBoxComPorts.Location = new System.Drawing.Point(8, 21);
+            this.cBoxComPorts.Margin = new System.Windows.Forms.Padding(5);
+            this.cBoxComPorts.Name = "cBoxComPorts";
+            this.cBoxComPorts.Size = new System.Drawing.Size(160, 21);
+            this.cBoxComPorts.TabIndex = 2;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(8, 52);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(5);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(160, 21);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cBoxComPorts);
+            this.groupBox1.Controls.Add(this.btnRefresh);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(5, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(174, 77);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "COM Port";
             // 
             // EntryForm
             // 
+            this.AcceptButton = this.btnConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(246, 162);
-            this.Controls.Add(this.comboBox1);
+            this.CancelButton = this.btnExit;
+            this.ClientSize = new System.Drawing.Size(184, 120);
+            this.ControlBox = false;
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "EntryForm";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Text = "AT Commander";
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion
 
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cBoxComPorts;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.GroupBox groupBox1;
 
     }
 }

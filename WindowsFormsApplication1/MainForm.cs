@@ -16,5 +16,16 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
+
+
+
+        #region EVENTS ########################################################
+        // Main Form Closed ===================================================
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+        #endregion
+
     }
 }

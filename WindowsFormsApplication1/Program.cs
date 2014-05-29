@@ -16,7 +16,11 @@ namespace WindowsFormsApplication1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new EntryForm());
+     
+            EntryForm EntryForm = new EntryForm();
+            EntryForm.Show();
+
+            Application.Run();
         }
     }
 }
