@@ -13,6 +13,7 @@ namespace WindowsFormsApplication1
 
         #region METHODS #######################################################
         // POPULATE COM PORTS =================================================
+        // + modem verification
         public static void AT_populateComPorts(ComboBox cBoxComPorts) 
         {
             foreach (string ports in SerialPort.GetPortNames())
