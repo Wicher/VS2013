@@ -16,10 +16,11 @@ namespace WindowsFormsApplication1
         SerialPort comPort = new SerialPort();
 
 
+
         public EntryForm()
         {
             InitializeComponent();
-      //      AT_SerialPort.AT_populateComPorts(cBoxComPorts, comPort);
+            comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
         }
 
         #region BUTTONS #######################################################
@@ -46,6 +47,17 @@ namespace WindowsFormsApplication1
 
         #endregion ############################################################
 
+
+
+        private void DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            DataReceivedHandler();
+        }
+
+        private string DataReceivedHandler()
+        {
+            return comPort.ReadExisting().ToString();
+        }
     }
 
 

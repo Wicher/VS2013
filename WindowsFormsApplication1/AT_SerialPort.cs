@@ -36,14 +36,39 @@ namespace WindowsFormsApplication1
                     {
                         comPort.WriteLine("AT\r");
                        // MessageBox.Show(comPort.ReadLine().ToString());
-                        if (comPort.ReadLine().ToString().Equals("OK")) cBoxComPorts.Items.Add(ports);
+                   //     if (comPort.ReadLine().ToString().Equals("OK")) cBoxComPorts.Items.Add(ports);
+                        if (comPort.ReadExisting().ToString().Equals("OK")) cBoxComPorts.Items.Add(ports);
+                        //cBoxComPorts.Items.Add(ports);
                         comPort.Close();
                     }
 
 
 
 
+                    /*
+                    #region Data Receive  
+                    private void SetText(string text)
+                    {
+                        if (this.textB_Console.InvokeRequired)
+                        {
+                            SetTextCallback d = new SetTextCallback(SetText);
+                            this.Invoke(d, new object[] { text });
+                        }
+                        else
+                        {
+                            this.textB_Console.AppendText(text);
+                        }
+                    }
 
+                    private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+                    {
+                        string txt = _serialPort.ReadExisting().ToString();
+                        SetText(txt.ToString());
+                    }
+                    #endregion
+                    */
+                      
+                     
                     /* checking
                     comPort.PortName = "COM33";
                     comPort.Open();
@@ -51,7 +76,7 @@ namespace WindowsFormsApplication1
                     MessageBox.Show(comPort.ReadLine().ToString());
                     comPort.Close();
                     */
-                
+
                 }
             }      
         }
