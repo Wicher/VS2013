@@ -13,10 +13,13 @@ namespace WindowsFormsApplication1
 {
     public partial class EntryForm : Form
     {
+        SerialPort comPort = new SerialPort();
+
+
         public EntryForm()
         {
             InitializeComponent();
-            AT_SerialPort.AT_populateComPorts(cBoxComPorts);
+      //      AT_SerialPort.AT_populateComPorts(cBoxComPorts, comPort);
         }
 
         #region BUTTONS #######################################################
@@ -37,10 +40,8 @@ namespace WindowsFormsApplication1
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             cBoxComPorts.Items.Clear();
-            foreach (string ports in SerialPort.GetPortNames())
-            {
-                cBoxComPorts.Items.Add(ports);
-            }
+            AT_SerialPort.AT_populateComPorts(cBoxComPorts, comPort);
+
         }
 
         #endregion ############################################################
