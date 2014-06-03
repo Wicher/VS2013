@@ -10,12 +10,20 @@ namespace WindowsFormsApplication1
 {
     static class AT_SerialPort
     {
+
+        #region METHODS #######################################################
+        // POPULATE COM PORTS =================================================
         public static void AT_populateComPorts(ComboBox cBoxComPorts) 
         {
             foreach (string ports in SerialPort.GetPortNames())
             {
                 cBoxComPorts.Items.Add(ports);
-            } 
+            }
         }
+
+        
+
+
+        #endregion ############################################################
     }
 }

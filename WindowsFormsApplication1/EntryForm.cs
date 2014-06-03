@@ -17,12 +17,6 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             AT_SerialPort.AT_populateComPorts(cBoxComPorts);
-
-         /*   foreach (string ports in SerialPort.GetPortNames())
-            {
-                cBoxComPorts.Items.Add(ports);
-            } 
-         */
         }
 
         #region BUTTONS #######################################################
