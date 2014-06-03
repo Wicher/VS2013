@@ -16,10 +16,13 @@ namespace WindowsFormsApplication1
         public EntryForm()
         {
             InitializeComponent();
-            foreach (string ports in SerialPort.GetPortNames())
+            AT_SerialPort.AT_populateComPorts(cBoxComPorts);
+
+         /*   foreach (string ports in SerialPort.GetPortNames())
             {
                 cBoxComPorts.Items.Add(ports);
-            }
+            } 
+         */
         }
 
         #region BUTTONS #######################################################

@@ -118,7 +118,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.GroupBox groupBox1;
-        public System.Windows.Forms.ComboBox cBoxComPorts;
+        private System.Windows.Forms.ComboBox cBoxComPorts;
 
     }
 }
