@@ -17,6 +17,8 @@ namespace WindowsFormsApplication1
         
         private SerialPort comPort;
 
+        delegate void SetTextCallback(string text);
+
         #endregion ############################################################
 
 
@@ -25,7 +27,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             this.comPort = comPort;
-    //        comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
+   //         comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
         }
         #endregion ############################################################
 
@@ -55,15 +57,32 @@ namespace WindowsFormsApplication1
 
 
 
-        private void DataReceived(object sender, SerialDataReceivedEventArgs e)
+  /*      private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            DataReceivedHandler();
+            string txt = comPort.ReadExisting().ToString();
+            SetText(txt.ToString());
         }
 
-        private string DataReceivedHandler()
+        private void SetText(string text)
         {
-            return comPort.ReadExisting().ToString();
-        }
+            if (this.label1.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.label1.Text = text;
+            }
+        } */
+
+
+
+
+        //private string DataReceivedHandler()
+        //{
+        //    return comPort.ReadExisting().ToString();
+        //}
     }
 
 

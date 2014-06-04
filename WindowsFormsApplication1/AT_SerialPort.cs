@@ -20,7 +20,9 @@ namespace WindowsFormsApplication1
             comPort.Parity      = Parity.None;
             comPort.StopBits    = StopBits.One;
             comPort.Handshake   = Handshake.None;
+            comPort.NewLine     = "\r\n";
             comPort.RtsEnable   = false;
+            
 
             foreach (string ports in SerialPort.GetPortNames())
             {
@@ -34,48 +36,49 @@ namespace WindowsFormsApplication1
                     comPort.Open();
                     if (comPort.IsOpen)
                     {
-                        comPort.WriteLine("AT\r");
-                       // MessageBox.Show(comPort.ReadLine().ToString());
-                   //     if (comPort.ReadLine().ToString().Equals("OK")) cBoxComPorts.Items.Add(ports);
-                        if (comPort.ReadExisting().ToString().Equals("OK")) cBoxComPorts.Items.Add(ports);
-                        //cBoxComPorts.Items.Add(ports);
-                        comPort.Close();
+                        comPort.WriteLine("ATE0");
+                        System.Threading.Thread.Sleep(100);
+                        comPort.WriteLine("AT");
+                        while (!comPort.ReadLine().Equals("OK")) MessageBox.Show("modem OK");
+
+
+
+
+
+
+
+                            //             if (comPort.ReadLine().Equals("OK")) MessageBox.Show("trafiony");
+
+                            //             comPort.WriteLine("AT\r");
+
+
+
+
+
+
+
+                            //        while (!comPort.ReadLine().Equals("OK")) comPort.DiscardInBuffer();
+                            //       MessageBox.Show("got OK");
+
+                            //answer = comPort.ReadLine();
+
+
+                            /*      if (!comPort.ReadLine().Contains("\r\n"))
+                                  {
+                                      answer = comPort.ReadLine();
+                                      MessageBox.Show(answer);
+                                  }*/
+
+                            // MessageBox.Show(comPort.ReadLine().ToString());
+                            //     if (comPort.ReadLine().ToString().Equals("OK")) cBoxComPorts.Items.Add(ports);
+                            //     if (comPort.ReadExisting().ToString().Equals("OK")) cBoxComPorts.Items.Add(ports);
+                            //cBoxComPorts.Items.Add(ports);
+
+
+
+                            comPort.Close();
                     }
 
-
-
-
-                    /*
-                    #region Data Receive  
-                    private void SetText(string text)
-                    {
-                        if (this.textB_Console.InvokeRequired)
-                        {
-                            SetTextCallback d = new SetTextCallback(SetText);
-                            this.Invoke(d, new object[] { text });
-                        }
-                        else
-                        {
-                            this.textB_Console.AppendText(text);
-                        }
-                    }
-
-                    private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
-                    {
-                        string txt = _serialPort.ReadExisting().ToString();
-                        SetText(txt.ToString());
-                    }
-                    #endregion
-                    */
-                      
-                     
-                    /* checking
-                    comPort.PortName = "COM33";
-                    comPort.Open();
-                    comPort.WriteLine("AT");
-                    MessageBox.Show(comPort.ReadLine().ToString());
-                    comPort.Close();
-                    */
 
                 }
             }      

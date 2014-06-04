@@ -97,7 +97,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(184, 120);
+            this.ClientSize = new System.Drawing.Size(184, 122);
             this.ControlBox = false;
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnConnect);
