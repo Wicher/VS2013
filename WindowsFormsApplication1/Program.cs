@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
 
 namespace WindowsFormsApplication1
 {
@@ -14,11 +15,15 @@ namespace WindowsFormsApplication1
         [STAThread]
         static void Main()
         {
+            SerialPort comPort = new SerialPort();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
      
-            EntryForm EntryForm = new EntryForm();
+            EntryForm EntryForm = new EntryForm(comPort);
             EntryForm.Show();
+
+
 
             Application.Run();
         }

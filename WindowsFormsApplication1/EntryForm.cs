@@ -13,15 +13,21 @@ namespace WindowsFormsApplication1
 {
     public partial class EntryForm : Form
     {
-        SerialPort comPort = new SerialPort();
+        #region VARIABLES #####################################################
+        
+        private SerialPort comPort;
+
+        #endregion ############################################################
 
 
-
-        public EntryForm()
+        #region INITIALIZATION ################################################
+        public EntryForm(SerialPort comPort)
         {
             InitializeComponent();
-            comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
+            this.comPort = comPort;
+    //        comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
         }
+        #endregion ############################################################
 
         #region BUTTONS #######################################################
         // CONNECT ============================================================
@@ -29,6 +35,7 @@ namespace WindowsFormsApplication1
         {
             MainForm MainForm = new MainForm();
             MainForm.Show();
+            this.Close();
         }
 
         // EXIT ===============================================================
@@ -42,7 +49,6 @@ namespace WindowsFormsApplication1
         {
             cBoxComPorts.Items.Clear();
             AT_SerialPort.AT_populateComPorts(cBoxComPorts, comPort);
-
         }
 
         #endregion ############################################################
