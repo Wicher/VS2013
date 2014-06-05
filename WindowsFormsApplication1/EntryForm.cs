@@ -17,21 +17,31 @@ namespace WindowsFormsApplication1
         
         private SerialPort comPort;
 
-        delegate void SetTextCallback(string text);
-
         #endregion ############################################################
-
 
         #region INITIALIZATION ################################################
         public EntryForm(SerialPort comPort)
         {
             InitializeComponent();
             this.comPort = comPort;
-   //         comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
         }
         #endregion ############################################################
 
         #region BUTTONS #######################################################
+        // REFRESH ============================================================
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            cBoxComPorts.Items.Clear();
+            AT_SerialPort.AT_populateComPorts(cBoxComPorts, comPort);
+        }
+        
+        // TURN MODEM ON ######################################################
+        private void btnModem_Click(object sender, EventArgs e)
+        {
+            // INSERT COMMAND
+            // adb root && timeout 2 && adb remount && adb shell setprop persist.usb.eng 1 && adb shell setprop sys.usb.config mtp,adb && timeout 3
+        }
+       
         // CONNECT ============================================================
         private void btnConnect_Click(object sender, EventArgs e)
         {
@@ -45,44 +55,7 @@ namespace WindowsFormsApplication1
         {
             Application.Exit();
         }
-
-        // REFRESH ============================================================
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            cBoxComPorts.Items.Clear();
-            AT_SerialPort.AT_populateComPorts(cBoxComPorts, comPort);
-        }
-
         #endregion ############################################################
-
-
-
-  /*      private void DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            string txt = comPort.ReadExisting().ToString();
-            SetText(txt.ToString());
-        }
-
-        private void SetText(string text)
-        {
-            if (this.label1.InvokeRequired)
-            {
-                SetTextCallback d = new SetTextCallback(SetText);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                this.label1.Text = text;
-            }
-        } */
-
-
-
-
-        //private string DataReceivedHandler()
-        //{
-        //    return comPort.ReadExisting().ToString();
-        //}
     }
 
 

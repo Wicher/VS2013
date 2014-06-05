@@ -33,12 +33,13 @@
             this.cBoxComPorts = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnModem = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(10, 90);
+            this.btnConnect.Location = new System.Drawing.Point(10, 119);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(5);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
@@ -50,7 +51,7 @@
             // btnExit
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(99, 90);
+            this.btnExit.Location = new System.Drawing.Point(99, 119);
             this.btnExit.Margin = new System.Windows.Forms.Padding(5);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
@@ -91,14 +92,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "COM Port";
             // 
+            // btnModem
+            // 
+            this.btnModem.Location = new System.Drawing.Point(13, 88);
+            this.btnModem.Margin = new System.Windows.Forms.Padding(5);
+            this.btnModem.Name = "btnModem";
+            this.btnModem.Size = new System.Drawing.Size(160, 21);
+            this.btnModem.TabIndex = 4;
+            this.btnModem.Text = "Turn Modem ON";
+            this.btnModem.UseVisualStyleBackColor = true;
+            this.btnModem.Click += new System.EventHandler(this.btnModem_Click);
+            // 
             // EntryForm
             // 
             this.AcceptButton = this.btnConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(184, 122);
+            this.ClientSize = new System.Drawing.Size(184, 152);
             this.ControlBox = false;
+            this.Controls.Add(this.btnModem);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.groupBox1);
@@ -119,6 +132,7 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cBoxComPorts;
+        private System.Windows.Forms.Button btnModem;
 
     }
 }
