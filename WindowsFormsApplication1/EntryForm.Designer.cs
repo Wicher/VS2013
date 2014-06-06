@@ -32,14 +32,16 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.cBoxComPorts = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbCOMPort = new System.Windows.Forms.GroupBox();
             this.btnModem = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.gbModem = new System.Windows.Forms.GroupBox();
+            this.gbCOMPort.SuspendLayout();
+            this.gbModem.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(10, 119);
+            this.btnConnect.Location = new System.Drawing.Point(10, 141);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(5);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
@@ -51,7 +53,7 @@
             // btnExit
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(99, 119);
+            this.btnExit.Location = new System.Drawing.Point(99, 141);
             this.btnExit.Margin = new System.Windows.Forms.Padding(5);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
@@ -80,21 +82,21 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // groupBox1
+            // gbCOMPort
             // 
-            this.groupBox1.Controls.Add(this.cBoxComPorts);
-            this.groupBox1.Controls.Add(this.btnRefresh);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(5, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(174, 77);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "COM Port";
+            this.gbCOMPort.Controls.Add(this.cBoxComPorts);
+            this.gbCOMPort.Controls.Add(this.btnRefresh);
+            this.gbCOMPort.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbCOMPort.Location = new System.Drawing.Point(5, 5);
+            this.gbCOMPort.Name = "gbCOMPort";
+            this.gbCOMPort.Size = new System.Drawing.Size(174, 77);
+            this.gbCOMPort.TabIndex = 4;
+            this.gbCOMPort.TabStop = false;
+            this.gbCOMPort.Text = "COM Port";
             // 
             // btnModem
             // 
-            this.btnModem.Location = new System.Drawing.Point(13, 88);
+            this.btnModem.Location = new System.Drawing.Point(8, 21);
             this.btnModem.Margin = new System.Windows.Forms.Padding(5);
             this.btnModem.Name = "btnModem";
             this.btnModem.Size = new System.Drawing.Size(160, 21);
@@ -103,24 +105,35 @@
             this.btnModem.UseVisualStyleBackColor = true;
             this.btnModem.Click += new System.EventHandler(this.btnModem_Click);
             // 
+            // gbModem
+            // 
+            this.gbModem.Controls.Add(this.btnModem);
+            this.gbModem.Location = new System.Drawing.Point(5, 87);
+            this.gbModem.Name = "gbModem";
+            this.gbModem.Size = new System.Drawing.Size(174, 46);
+            this.gbModem.TabIndex = 5;
+            this.gbModem.TabStop = false;
+            this.gbModem.Text = "Modem";
+            // 
             // EntryForm
             // 
             this.AcceptButton = this.btnConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(184, 152);
+            this.ClientSize = new System.Drawing.Size(184, 170);
             this.ControlBox = false;
-            this.Controls.Add(this.btnModem);
+            this.Controls.Add(this.gbModem);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnConnect);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbCOMPort);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "EntryForm";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Text = "AT Commander";
-            this.groupBox1.ResumeLayout(false);
+            this.gbCOMPort.ResumeLayout(false);
+            this.gbModem.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -130,9 +143,10 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbCOMPort;
         private System.Windows.Forms.ComboBox cBoxComPorts;
         private System.Windows.Forms.Button btnModem;
+        private System.Windows.Forms.GroupBox gbModem;
 
     }
 }
