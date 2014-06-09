@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Diagnostics;
@@ -14,14 +13,17 @@ namespace WindowsFormsApplication1
         #region VARIABLES #####################################################
         
         private SerialPort comPort;
+        private static Utility Utility = new Utility();
         private static Process cmd_pModem = new Process();
-        private static Utility util = new Utility();
         
         private static string pModemCommand = "adb root && timeout 2 && adb remount && adb shell setprop persist.usb.eng 1 && adb shell setprop sys.usb.config mtp,adb && timeout 3";
+
+        /* for future use
         private static string pModemError = "adbd cannot run as root in production builds";
         private static string pModemCheck = "adb shell getprop persist.usb.eng";
 
-        private string pModemOutput;
+        private string pModemOutput; 
+        */
                  
         #endregion ############################################################
 
@@ -44,35 +46,30 @@ namespace WindowsFormsApplication1
         // TURN MODEM ON ======================================================
         private void btnModem_Click(object sender, EventArgs e)
         {
-            foreach (Control control in this.Controls) util.DisableControl(control);
+            foreach (Control control in this.Controls) Utility.DisableControl(control);
 
             cmd_pModem.StartInfo.RedirectStandardOutput = true;
             cmd_pModem.StartInfo.UseShellExecute = false;
-            cmd_pModem.StartInfo.CreateNoWindow = false;
-  //          cmd_pModem.OutputDataReceived += cmd_DataReceived;
-            cmd_pModem.EnableRaisingEvents = true;
+            cmd_pModem.StartInfo.CreateNoWindow = true;
+
+            cmd_pModem.EnableRaisingEvents = false;
 
             cmd_pModem = Process.Start("cmd", "/c" + pModemCommand);
-
             
-
-            if (cmd_pModem.HasExited) 
-                cmd_pModem.BeginOutputReadLine();
-
             cmd_pModem.WaitForExit();
             
-          
             if (cmd_pModem.ExitCode.ToString() == "0")
             {
                 MessageBox.Show("Modem mounted successfully");
-                util.DisableControl(btnModem);
+                foreach (Control control in this.Controls) Utility.EnableControl(control);
+                Utility.DisableControl(btnModem);
             }
             else
+            {
                 MessageBox.Show("Fail to mount modem. Error Code: " + cmd_pModem.ExitCode.ToString());
-
+                foreach (Control control in this.Controls) Utility.EnableControl(control);
+            }
             cmd_pModem.Close();
-
-            foreach (Control control in this.Controls) util.EnableControl(control);
         }
        
         // CONNECT ============================================================
@@ -91,25 +88,11 @@ namespace WindowsFormsApplication1
         #endregion ############################################################
 
         #region METHODS #######################################################
- //
+        //
         #endregion ############################################################
 
         #region EVENTS ########################################################
-        // PROCESS data received ==============================================
-        //private void cmd_DataReceived(object sender, DataReceivedEventArgs e)
-        //{
-        //    pModemOutput = e.Data;
-        //    MessageBox.Show(pModemOutput);
-        //    if (pModemOutput == pModemError)
-        //    {
-        //        cmd_pModem.OutputDataReceived -= cmd_DataReceived;
-        //        cmd_pModem.CancelOutputRead();
-        //        cmd_pModem.WaitForExit(100);
-
-        //    }
-            
-        //}
-
+        //
         #endregion ############################################################
     }
 
