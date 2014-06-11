@@ -13,7 +13,7 @@ namespace WindowsFormsApplication1
         #region METHODS #######################################################
         // POPULATE COM PORTS =================================================
         // + modem verification 
-        public static bool AT_populateComPorts(ComboBox cBoxComPorts, SerialPort comPort) 
+        public static bool AT_populateComPorts(Button btnConnect, ComboBox cBoxComPorts, SerialPort comPort) 
         {
             comPort.BaudRate    = 115200;
             comPort.DataBits    = 8;
@@ -23,9 +23,17 @@ namespace WindowsFormsApplication1
             comPort.NewLine     = "\r\n";
             comPort.RtsEnable   = false;
 
+            comPort.ReadTimeout = 500;
+            comPort.WriteTimeout = 500;
+
+            StringComparer stringComparer = StringComparer.OrdinalIgnoreCase;
+
+            string message;
+            bool _continue = true;
+
             foreach (string ports in SerialPort.GetPortNames())
             {
-                if(ports.Equals("COM1") || ports.Equals("COM2"))
+                if (ports.Equals("COM1") || ports.Equals("COM2"))
                 {
                     continue;
                 }
@@ -38,32 +46,45 @@ namespace WindowsFormsApplication1
                         if (comPort.IsOpen)
                         {
                             comPort.WriteLine("ATE0");
-                            System.Threading.Thread.Sleep(100);
+                            while (!comPort.ReadLine().Equals("OK")) ;
                             comPort.WriteLine("AT");
-                            while (!comPort.ReadLine().Equals("OK")) MessageBox.Show("modem OK");
-                            comPort.Close();
-                            return true;
+                            while (_continue)
+                            {
+                                try
+                                {
+                                    message = comPort.ReadLine();
+                                    if (stringComparer.Equals("OK", message))
+                                    {
+                                        _continue = false;
+                                        cBoxComPorts.Items.Add(ports);
+                                        if (cBoxComPorts.Items.Count != 0)
+                                            cBoxComPorts.SelectedItem = ports;
+                                        comPort.Close();
+                                        Utility.EnableControl(btnConnect);
+                                        return true;
+                                    }
+                                }
+                                catch (TimeoutException error)
+                                {
+                                    MessageBox.Show("TimeoutException :" + error.Message);
+                                }
+                            }
                         }
                     }
-                    catch(UnauthorizedAccessException error)
+                    catch (Exception error)
                     {
-                        MessageBox.Show("UnauthorizedAccessException: " + error.Message);
-                    }
-                    catch(ArgumentOutOfRangeException error)
-                    {
-                        MessageBox.Show("ArgumentOutOfRangeException: " + error.Message);
-                    }
-                    catch (ArgumentException error)
-                    {
-                        MessageBox.Show("ArgumentException: " + error.Message);
-                    }
-                    catch (InvalidOperationException error)
-                    {
-                        MessageBox.Show("InvalidOperationException: " + error.Message);
+                        MessageBox.Show("Exception :" + error.Message);
                     }                 
                 }
             }
+            Utility.DisableControl(btnConnect);
             return false;
+        }
+
+        // CONNECT TO MODEM ===================================================
+        public static bool AT_connect(ComboBox cBoxComPorts, SerialPort comPort)
+        {
+            return true;
         }
 
         #endregion ############################################################

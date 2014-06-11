@@ -10,20 +10,21 @@ namespace WindowsFormsApplication1
 {
     public partial class EntryForm : Form
     {
-        #region VARIABLES #####################################################
-        
+        #region INSTANCES #####################################################
+
         private SerialPort comPort;
-        private static Utility Utility = new Utility();
         private static Process cmd_pModem = new Process();
-        
+
+
+        #endregion ############################################################
+
+        #region VARIABLES #####################################################
+
         private static string pModemCommand = "adb root && timeout 2 && adb remount && adb shell setprop persist.usb.eng 1 && adb shell setprop sys.usb.config mtp,adb && timeout 3";
 
-        /* for future use
-        private static string pModemError = "adbd cannot run as root in production builds";
-        private static string pModemCheck = "adb shell getprop persist.usb.eng";
-
-        private string pModemOutput; 
-        */
+        // private static string pModemError = "adbd cannot run as root in production builds";
+        // private static string pModemCheck = "adb shell getprop persist.usb.eng";
+        
         #endregion ############################################################
 
         #region INITIALIZATION ################################################
@@ -38,8 +39,7 @@ namespace WindowsFormsApplication1
         // REFRESH ============================================================
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            cBoxComPorts.Items.Clear();
-            AT_SerialPort.AT_populateComPorts(cBoxComPorts, comPort);
+            Refresh(this);
         }
         
         // TURN MODEM ON ======================================================
@@ -72,16 +72,17 @@ namespace WindowsFormsApplication1
                 }
                 cmd_pModem.Close();
             }
-            catch (InvalidOperationException error)
+            catch (Exception error)
             {
-                MessageBox.Show("InvalidOperationException :" + error.Message);
+                MessageBox.Show("Exception :" + error.Message);
             }
         }
        
         // CONNECT ============================================================
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            MainForm MainForm = new MainForm();
+            //AT_SerialPort.Connect();
+            MainForm MainForm = new MainForm(comPort);
             MainForm.Show();
             this.Close();
         }
@@ -94,7 +95,18 @@ namespace WindowsFormsApplication1
         #endregion ############################################################
 
         #region METHODS #######################################################
-        //
+        // REFRESH ============================================================
+        private static void Refresh(EntryForm Form)
+        {
+            Form.cBoxComPorts.Items.Clear();
+            if (!AT_SerialPort.AT_populateComPorts(Form.btnConnect, Form.cBoxComPorts, Form.comPort))
+                MessageBox.Show("No valid modem found");
+        }
+
+        // 
+
+
+
         #endregion ############################################################
 
         #region EVENTS ########################################################

@@ -41,6 +41,7 @@
             // 
             // btnConnect
             // 
+            this.btnConnect.Enabled = false;
             this.btnConnect.Location = new System.Drawing.Point(10, 141);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(5);
             this.btnConnect.Name = "btnConnect";
@@ -145,9 +146,9 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.GroupBox gbCOMPort;
-        private System.Windows.Forms.ComboBox cBoxComPorts;
         private System.Windows.Forms.Button btnModem;
         private System.Windows.Forms.GroupBox gbModem;
+        private System.Windows.Forms.ComboBox cBoxComPorts;
 
     }
 }

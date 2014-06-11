@@ -13,21 +13,32 @@ namespace WindowsFormsApplication1
 {
     public partial class MainForm : Form
     {
+        #region VARIABLES #####################################################
 
-        public MainForm()
+        private SerialPort comPort;
+
+        #endregion ############################################################
+
+        #region INITIALIZATION ################################################
+        public MainForm(SerialPort comPort)
         {
             InitializeComponent();
+            this.Enabled = true;
+            this.BringToFront();
+            this.CenterToParent();
+            this.TopMost = true;
+
+            this.comPort = comPort;
         }
 
-
+        #endregion ############################################################
 
         #region EVENTS ########################################################
-        // Main Form Closed ===================================================
+        // MAIN FORM CLOSED ===================================================
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
         #endregion ############################################################
-
     }
 }

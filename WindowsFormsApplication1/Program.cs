@@ -23,8 +23,6 @@ namespace WindowsFormsApplication1
             EntryForm EntryForm = new EntryForm(comPort);
             EntryForm.Show();
 
-
-
             Application.Run();
         }
     }
