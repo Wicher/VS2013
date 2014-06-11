@@ -64,6 +64,7 @@
             // 
             // cBoxComPorts
             // 
+            this.cBoxComPorts.BackColor = System.Drawing.SystemColors.Window;
             this.cBoxComPorts.FormattingEnabled = true;
             this.cBoxComPorts.Location = new System.Drawing.Point(8, 21);
             this.cBoxComPorts.Margin = new System.Windows.Forms.Padding(5);

@@ -24,7 +24,6 @@ namespace WindowsFormsApplication1
 
         private string pModemOutput; 
         */
-                 
         #endregion ############################################################
 
         #region INITIALIZATION ################################################
@@ -54,22 +53,29 @@ namespace WindowsFormsApplication1
 
             cmd_pModem.EnableRaisingEvents = false;
 
-            cmd_pModem = Process.Start("cmd", "/c" + pModemCommand);
-            
-            cmd_pModem.WaitForExit();
-            
-            if (cmd_pModem.ExitCode.ToString() == "0")
+            try
             {
-                MessageBox.Show("Modem mounted successfully");
-                foreach (Control control in this.Controls) Utility.EnableControl(control);
-                Utility.DisableControl(btnModem);
+                cmd_pModem = Process.Start("cmd", "/c" + pModemCommand);
+
+                cmd_pModem.WaitForExit();
+
+                if (cmd_pModem.ExitCode.ToString() == "0")
+                {
+                    MessageBox.Show("Modem mounted successfully");
+                    foreach (Control control in this.Controls) Utility.EnableControl(control);
+                    Utility.DisableControl(btnModem);
+                }
+                else
+                {
+                    MessageBox.Show("Fail to mount modem. Error Code: " + cmd_pModem.ExitCode.ToString());
+                    foreach (Control control in this.Controls) Utility.EnableControl(control);
+                }
+                cmd_pModem.Close();
             }
-            else
+            catch (InvalidOperationException error)
             {
-                MessageBox.Show("Fail to mount modem. Error Code: " + cmd_pModem.ExitCode.ToString());
-                foreach (Control control in this.Controls) Utility.EnableControl(control);
+                MessageBox.Show("InvalidOperationException :" + error.Message);
             }
-            cmd_pModem.Close();
         }
        
         // CONNECT ============================================================

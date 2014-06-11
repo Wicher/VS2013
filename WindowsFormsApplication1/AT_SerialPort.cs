@@ -13,7 +13,7 @@ namespace WindowsFormsApplication1
         #region METHODS #######################################################
         // POPULATE COM PORTS =================================================
         // + modem verification 
-        public static void AT_populateComPorts(ComboBox cBoxComPorts, SerialPort comPort) 
+        public static bool AT_populateComPorts(ComboBox cBoxComPorts, SerialPort comPort) 
         {
             comPort.BaudRate    = 115200;
             comPort.DataBits    = 8;
@@ -22,7 +22,6 @@ namespace WindowsFormsApplication1
             comPort.Handshake   = Handshake.None;
             comPort.NewLine     = "\r\n";
             comPort.RtsEnable   = false;
-            
 
             foreach (string ports in SerialPort.GetPortNames())
             {
@@ -33,59 +32,39 @@ namespace WindowsFormsApplication1
                 else
                 {
                     comPort.PortName = ports;
-                    comPort.Open();
-                    if (comPort.IsOpen)
+                    try
                     {
-                        comPort.WriteLine("ATE0");
-                        System.Threading.Thread.Sleep(100);
-                        comPort.WriteLine("AT");
-                        while (!comPort.ReadLine().Equals("OK")) MessageBox.Show("modem OK");
-
-
-
-
-
-
-
-                            //             if (comPort.ReadLine().Equals("OK")) MessageBox.Show("trafiony");
-
-                            //             comPort.WriteLine("AT\r");
-
-
-
-
-
-
-
-                            //        while (!comPort.ReadLine().Equals("OK")) comPort.DiscardInBuffer();
-                            //       MessageBox.Show("got OK");
-
-                            //answer = comPort.ReadLine();
-
-
-                            /*      if (!comPort.ReadLine().Contains("\r\n"))
-                                  {
-                                      answer = comPort.ReadLine();
-                                      MessageBox.Show(answer);
-                                  }*/
-
-                            // MessageBox.Show(comPort.ReadLine().ToString());
-                            //     if (comPort.ReadLine().ToString().Equals("OK")) cBoxComPorts.Items.Add(ports);
-                            //     if (comPort.ReadExisting().ToString().Equals("OK")) cBoxComPorts.Items.Add(ports);
-                            //cBoxComPorts.Items.Add(ports);
-
-
-
+                        comPort.Open();
+                        if (comPort.IsOpen)
+                        {
+                            comPort.WriteLine("ATE0");
+                            System.Threading.Thread.Sleep(100);
+                            comPort.WriteLine("AT");
+                            while (!comPort.ReadLine().Equals("OK")) MessageBox.Show("modem OK");
                             comPort.Close();
+                            return true;
+                        }
                     }
-
-
+                    catch(UnauthorizedAccessException error)
+                    {
+                        MessageBox.Show("UnauthorizedAccessException: " + error.Message);
+                    }
+                    catch(ArgumentOutOfRangeException error)
+                    {
+                        MessageBox.Show("ArgumentOutOfRangeException: " + error.Message);
+                    }
+                    catch (ArgumentException error)
+                    {
+                        MessageBox.Show("ArgumentException: " + error.Message);
+                    }
+                    catch (InvalidOperationException error)
+                    {
+                        MessageBox.Show("InvalidOperationException: " + error.Message);
+                    }                 
                 }
-            }      
+            }
+            return false;
         }
-
-        
-
 
         #endregion ############################################################
 

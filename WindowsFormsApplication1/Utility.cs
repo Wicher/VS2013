@@ -59,20 +59,20 @@ namespace WindowsFormsApplication1
                 else
                     return false;
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException error)
             {
-                MessageBox.Show("ArgumentNullException :" + e.Message);
+                MessageBox.Show("ArgumentNullException :" + error.Message);
                 return false;
             }
-            catch (AmbiguousMatchException e)
+            catch (AmbiguousMatchException error)
             {
-                Console.WriteLine("AmbiguousMatchException :" + e.Message);
+                Console.WriteLine("AmbiguousMatchException :" + error.Message);
                 return false;
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException error)
             {
-                Console.WriteLine("Source : {0}", e.Source);
-                Console.WriteLine("Message : {0}", e.Message);
+                Console.WriteLine("Source : {0}", error.Source);
+                Console.WriteLine("Message : {0}", error.Message);
                 return false;
             }
         }
