@@ -82,8 +82,9 @@ namespace WindowsFormsApplication1
         }
 
         // CONNECT TO MODEM ===================================================
-        public static bool AT_connect(ComboBox cBoxComPorts, SerialPort comPort)
+        public static bool AT_Connect(ComboBox cBoxComPorts, SerialPort comPort)
         {
+
             return true;
         }
 

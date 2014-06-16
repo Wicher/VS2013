@@ -15,7 +15,6 @@ namespace WindowsFormsApplication1
         private SerialPort comPort;
         private static Process cmd_pModem = new Process();
 
-
         #endregion ############################################################
 
         #region VARIABLES #####################################################
@@ -45,46 +44,13 @@ namespace WindowsFormsApplication1
         // TURN MODEM ON ======================================================
         private void btnModem_Click(object sender, EventArgs e)
         {
-            foreach (Control control in this.Controls) Utility.DisableControl(control);
-
-            cmd_pModem.StartInfo.RedirectStandardOutput = true;
-            cmd_pModem.StartInfo.UseShellExecute = false;
-            cmd_pModem.StartInfo.CreateNoWindow = true;
-
-            cmd_pModem.EnableRaisingEvents = false;
-
-            try
-            {
-                cmd_pModem = Process.Start("cmd", "/c" + pModemCommand);
-
-                cmd_pModem.WaitForExit();
-
-                if (cmd_pModem.ExitCode.ToString() == "0")
-                {
-                    MessageBox.Show("Modem mounted successfully");
-                    foreach (Control control in this.Controls) Utility.EnableControl(control);
-                    Utility.DisableControl(btnModem);
-                }
-                else
-                {
-                    MessageBox.Show("Fail to mount modem. Error Code: " + cmd_pModem.ExitCode.ToString());
-                    foreach (Control control in this.Controls) Utility.EnableControl(control);
-                }
-                cmd_pModem.Close();
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show("Exception :" + error.Message);
-            }
+            ModemOn(this);
         }
        
         // CONNECT ============================================================
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            //AT_SerialPort.Connect();
-            MainForm MainForm = new MainForm(comPort);
-            MainForm.Show();
-            this.Close();
+            Connect(this);
         }
 
         // EXIT ===============================================================
@@ -103,10 +69,44 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("No valid modem found");
         }
 
-        // 
+        // TURN MODEM ON ======================================================
+        private static void ModemOn(EntryForm Form)
+        {
+            Utility.DisableControls(Form);
+            cmd_pModem.StartInfo.RedirectStandardOutput = true;
+            cmd_pModem.StartInfo.UseShellExecute = false;
+            cmd_pModem.StartInfo.CreateNoWindow = true;
+            cmd_pModem.EnableRaisingEvents = false;
+            try
+            {
+                cmd_pModem = Process.Start("cmd", "/c" + pModemCommand);
+                cmd_pModem.WaitForExit();
+                if (cmd_pModem.ExitCode.ToString() == "0")
+                {
+                    MessageBox.Show("Modem mounted successfully");
+                    Utility.EnableControls(Form);
+                }
+                else
+                {
+                    MessageBox.Show("Fail to mount modem. Error Code: " + cmd_pModem.ExitCode.ToString());
+                    Utility.EnableControlsExcluding(Form, Form.btnConnect);
+                }
+                cmd_pModem.Close();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Exception :" + error.Message);
+            }
+        }
 
-
-
+        // CONNECT ============================================================
+        private static void Connect(EntryForm Form)
+        {
+            AT_SerialPort.AT_Connect(Form.cBoxComPorts,Form.comPort);
+            //MainForm MainForm = new MainForm(Form.comPort);
+            //MainForm.Show();
+            //Form.Close();
+        }
         #endregion ############################################################
 
         #region EVENTS ########################################################

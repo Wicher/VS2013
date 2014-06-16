@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1
         #endregion ############################################################
 
         #region PUBLIC METHODS ################################################
-        // Lock Control =======================================================
+        // Disable Control ====================================================
         public static void DisableControl(dynamic control)
         {
             if (CheckProperty(control, controlPropertyEnabled))
@@ -26,7 +26,7 @@ namespace WindowsFormsApplication1
             }   
         }
 
-        // Unlock Control =====================================================
+        // Enable Control =====================================================
         public static void EnableControl(dynamic control)
         {
             if (CheckProperty(control, controlPropertyEnabled))
@@ -35,7 +35,7 @@ namespace WindowsFormsApplication1
                     control.Enabled = true;
             }  
         }
-        
+
         // Toggle Control =====================================================
         public static void ToggleControl(dynamic control)
         {
@@ -43,6 +43,29 @@ namespace WindowsFormsApplication1
                 control.Enabled = !control.Enabled; 
         }
 
+        // Disable Controls ===================================================
+        public static void DisableControls(Form Form)
+        {
+            foreach (Control control in Form.Controls) DisableControl(control);
+        }
+
+        // Enable Controls ====================================================
+        public static void EnableControls(Form Form)
+        {
+            foreach (Control control in Form.Controls) EnableControl(control);
+        }
+
+        // Enable Controls excluding ... ======================================
+        public static void EnableControlsExcluding(Form Form, dynamic _control)
+        {
+            foreach (Control control in Form.Controls)
+            {
+                if (control == _control)
+                    continue;
+                EnableControl(control);
+            }
+        }
+        
         #endregion ############################################################
 
         #region PRIVATE METHODS ###############################################
