@@ -15,17 +15,6 @@ namespace WindowsFormsApplication1
         // + modem verification 
         public static bool AT_populateComPorts(Button btnConnect, ComboBox cBoxComPorts, SerialPort comPort) 
         {
-            comPort.BaudRate    = 115200;
-            comPort.DataBits    = 8;
-            comPort.Parity      = Parity.None;
-            comPort.StopBits    = StopBits.One;
-            comPort.Handshake   = Handshake.None;
-            comPort.NewLine     = "\r\n";
-            comPort.RtsEnable   = false;
-
-            comPort.ReadTimeout = 500;
-            comPort.WriteTimeout = 500;
-
             StringComparer stringComparer = StringComparer.OrdinalIgnoreCase;
 
             string message;
@@ -67,8 +56,10 @@ namespace WindowsFormsApplication1
                                 catch (TimeoutException error)
                                 {
                                     MessageBox.Show("TimeoutException :" + error.Message);
+                                    comPort.Close();
                                 }
                             }
+                            comPort.Close();
                         }
                     }
                     catch (Exception error)
@@ -82,12 +73,52 @@ namespace WindowsFormsApplication1
         }
 
         // CONNECT TO MODEM ===================================================
-        public static bool AT_Connect(ComboBox cBoxComPorts, SerialPort comPort)
+        public static bool AT_Connect(ComboBox cBoxComPorts, SerialPort comPort, TextBox textBox1)
         {
-
+           // MessageBox.Show(cBoxComPorts.SelectedItem.ToString());
+            string message;
+            var counter = 0;
+            
+            comPort.PortName = cBoxComPorts.SelectedItem.ToString();
+            try
+            {
+                comPort.Open();
+                if(comPort.IsOpen)
+                {
+                    comPort.WriteLine("AT*");
+                    comPort.ReadLine();
+                    while(true)
+                    {
+                        message = comPort.ReadLine();
+                        if (message.Equals(""))
+                            break;
+                        textBox1.AppendText(message + "\n");
+                        counter++;
+                    }
+                    textBox1.AppendText(counter.ToString() + "\n");
+                    comPort.Close();
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Exception: " + error.Message);
+            }
             return true;
         }
 
+        // CONFIGURE COM PORT =================================================
+        public static void ConfigureComPort(SerialPort comPort)
+        {
+            comPort.BaudRate = 115200;
+            comPort.DataBits = 8;
+            comPort.Parity = Parity.None;
+            comPort.StopBits = StopBits.One;
+            comPort.Handshake = Handshake.None;
+            comPort.NewLine = "\r\n";
+            comPort.RtsEnable = false;
+            comPort.ReadTimeout = 500;
+            comPort.WriteTimeout = 500;
+        }
         #endregion ############################################################
 
         #region EVENTS ########################################################

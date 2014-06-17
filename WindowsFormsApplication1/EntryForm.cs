@@ -65,6 +65,7 @@ namespace WindowsFormsApplication1
         private static void Refresh(EntryForm Form)
         {
             Form.cBoxComPorts.Items.Clear();
+            AT_SerialPort.ConfigureComPort(Form.comPort);
             if (!AT_SerialPort.AT_populateComPorts(Form.btnConnect, Form.cBoxComPorts, Form.comPort))
                 MessageBox.Show("No valid modem found");
         }
@@ -102,7 +103,7 @@ namespace WindowsFormsApplication1
         // CONNECT ============================================================
         private static void Connect(EntryForm Form)
         {
-            AT_SerialPort.AT_Connect(Form.cBoxComPorts,Form.comPort);
+            AT_SerialPort.AT_Connect(Form.cBoxComPorts,Form.comPort,Form.textBox1);
             //MainForm MainForm = new MainForm(Form.comPort);
             //MainForm.Show();
             //Form.Close();

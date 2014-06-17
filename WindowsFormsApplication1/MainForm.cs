@@ -11,7 +11,7 @@ namespace WindowsFormsApplication1
 {
     public partial class MainForm : Form
     {
-        #region VARIABLES #####################################################
+        #region INSTANCES #####################################################
 
         private SerialPort comPort;
 
@@ -28,7 +28,6 @@ namespace WindowsFormsApplication1
 
             this.comPort = comPort;
         }
-
         #endregion ############################################################
 
         #region EVENTS ########################################################
