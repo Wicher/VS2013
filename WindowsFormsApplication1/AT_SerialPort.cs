@@ -73,37 +73,34 @@ namespace WindowsFormsApplication1
         }
 
         // CONNECT TO MODEM ===================================================
-        public static bool AT_Connect(ComboBox cBoxComPorts, SerialPort comPort, TextBox textBox1)
+        public static bool AT_Connect(ComboBox cBoxComPorts, SerialPort comPort)
         {
-           // MessageBox.Show(cBoxComPorts.SelectedItem.ToString());
-            string message;
-            var counter = 0;
-            
             comPort.PortName = cBoxComPorts.SelectedItem.ToString();
             try
             {
                 comPort.Open();
                 if(comPort.IsOpen)
                 {
-                    comPort.WriteLine("AT*");
-                    comPort.ReadLine();
-                    while(true)
-                    {
-                        message = comPort.ReadLine();
-                        if (message.Equals(""))
-                            break;
-                        textBox1.AppendText(message + "\n");
-                        counter++;
-                    }
-                    textBox1.AppendText(counter.ToString() + "\n");
-                    comPort.Close();
+                    //comPort.WriteLine("AT*");
+                    //comPort.ReadLine();
+                    //while(true)
+                    //{
+                    //    message = comPort.ReadLine();
+                    //    if (message.Equals(""))
+                    //        break;
+                    //    textBox1.AppendText(message + "\n");
+                    //    counter++;
+                    //}
+                    //textBox1.AppendText(counter.ToString() + "\n");
+                    //comPort.Close();
+                    return true;
                 }
             }
             catch (Exception error)
             {
                 MessageBox.Show("Exception: " + error.Message);
             }
-            return true;
+            return false;
         }
 
         // CONFIGURE COM PORT =================================================

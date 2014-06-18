@@ -103,10 +103,10 @@ namespace WindowsFormsApplication1
         // CONNECT ============================================================
         private static void Connect(EntryForm Form)
         {
-            AT_SerialPort.AT_Connect(Form.cBoxComPorts,Form.comPort,Form.textBox1);
-            //MainForm MainForm = new MainForm(Form.comPort);
-            //MainForm.Show();
-            //Form.Close();
+            AT_SerialPort.AT_Connect(Form.cBoxComPorts,Form.comPort);
+            MainForm MainForm = new MainForm(Form.comPort);
+            MainForm.Show();
+            Form.Close();
         }
         #endregion ############################################################
 

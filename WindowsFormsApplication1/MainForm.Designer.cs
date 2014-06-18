@@ -33,7 +33,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.TreeView_AtCommands = new System.Windows.Forms.TreeView();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,19 +87,19 @@
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // treeView1
+            // TreeView_AtCommands
             // 
-            this.treeView1.Location = new System.Drawing.Point(13, 13);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(147, 558);
-            this.treeView1.TabIndex = 1;
+            this.TreeView_AtCommands.Location = new System.Drawing.Point(13, 13);
+            this.TreeView_AtCommands.Name = "TreeView_AtCommands";
+            this.TreeView_AtCommands.Size = new System.Drawing.Size(147, 558);
+            this.TreeView_AtCommands.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(496, 582);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.TreeView_AtCommands);
             this.Controls.Add(this.tabControl1);
             this.Enabled = false;
             this.Name = "MainForm";
@@ -117,7 +117,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView TreeView_AtCommands;
     }
 }
 

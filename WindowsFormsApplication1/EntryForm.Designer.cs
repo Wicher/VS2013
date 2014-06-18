@@ -35,7 +35,6 @@
             this.gbCOMPort = new System.Windows.Forms.GroupBox();
             this.btnModem = new System.Windows.Forms.Button();
             this.gbModem = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.gbCOMPort.SuspendLayout();
             this.gbModem.SuspendLayout();
             this.SuspendLayout();
@@ -118,24 +117,14 @@
             this.gbModem.TabStop = false;
             this.gbModem.Text = "Modem";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(9, 173);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(164, 350);
-            this.textBox1.TabIndex = 6;
-            // 
             // EntryForm
             // 
             this.AcceptButton = this.btnConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(184, 531);
+            this.ClientSize = new System.Drawing.Size(184, 170);
             this.ControlBox = false;
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.gbModem);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnConnect);
@@ -148,7 +137,6 @@
             this.gbCOMPort.ResumeLayout(false);
             this.gbModem.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -161,7 +149,6 @@
         private System.Windows.Forms.Button btnModem;
         private System.Windows.Forms.GroupBox gbModem;
         private System.Windows.Forms.ComboBox cBoxComPorts;
-        private System.Windows.Forms.TextBox textBox1;
 
     }
 }

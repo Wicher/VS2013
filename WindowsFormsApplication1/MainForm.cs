@@ -27,13 +27,38 @@ namespace WindowsFormsApplication1
             this.TopMost = true;
 
             this.comPort = comPort;
+
+            PopulateTreeView(comPort, TreeView_AtCommands);
+
         }
+        #endregion ############################################################
+        
+        #region METHODS #######################################################
+        // POPULATE TREEVIEW ==================================================
+        private static void PopulateTreeView(SerialPort comPort,TreeView TreeView)
+        {
+            string message;
+
+            comPort.WriteLine("AT*");
+            comPort.ReadLine();
+            while (true)
+            {
+                message = comPort.ReadLine();
+                if (message.Equals(""))
+                    break;
+                TreeView.Nodes.Add(message);
+            }
+        }
+
+
+
         #endregion ############################################################
 
         #region EVENTS ########################################################
         // MAIN FORM CLOSED ===================================================
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            comPort.Close();
             Application.Exit();
         }
         #endregion ############################################################
