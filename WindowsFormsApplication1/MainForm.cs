@@ -38,19 +38,21 @@ namespace WindowsFormsApplication1
         private static void PopulateTreeView(SerialPort comPort,TreeView TreeView)
         {
             string message;
+            bool _continue = true;
 
             comPort.WriteLine("AT*");
             comPort.ReadLine();
-            while (true)
+            while (_continue)
             {
                 message = comPort.ReadLine();
                 if (message.Equals(""))
-                    break;
+                {
+                    _continue = false;
+                    continue;
+                }    
                 TreeView.Nodes.Add(message);
             }
         }
-
-
 
         #endregion ############################################################
 
